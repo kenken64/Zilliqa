@@ -36,10 +36,10 @@ bool Transaction::SerializeCoreFields(bytes& dst, unsigned int offset) const {
 
 Transaction::Transaction() {}
 
-Transaction::Transaction(const Transaction& src)
-    : m_tranID(src.m_tranID),
-      m_coreInfo(src.m_coreInfo),
-      m_signature(src.m_signature) {}
+// Transaction::Transaction(const Transaction& src)
+//  : m_tranID(src.m_tranID),
+//  m_coreInfo(src.m_coreInfo),
+// m_signature(src.m_signature) {}
 
 Transaction::Transaction(const bytes& src, unsigned int offset) {
   Deserialize(src, offset);
@@ -112,7 +112,7 @@ Transaction::Transaction(const uint32_t& version, const uint64_t& nonce,
 }
 
 Transaction::Transaction(const TxnHash& tranID,
-                         const TransactionCoreInfo coreInfo,
+                         const TransactionCoreInfo& coreInfo,
                          const Signature& signature)
     : m_tranID(tranID), m_coreInfo(coreInfo), m_signature(signature) {}
 
@@ -207,11 +207,11 @@ bool Transaction::operator>(const Transaction& tran) const {
   return tran < *this;
 }
 
-Transaction& Transaction::operator=(const Transaction& src) {
-  copy(src.m_tranID.asArray().begin(), src.m_tranID.asArray().end(),
-       m_tranID.asArray().begin());
-  m_signature = src.m_signature;
-  m_coreInfo = src.m_coreInfo;
+// Transaction& Transaction::operator=(const Transaction& src) {
+// copy(src.m_tranID.asArray().begin(), src.m_tranID.asArray().end(),
+// m_tranID.asArray().begin());
+// m_signature = src.m_signature;
+// m_coreInfo = src.m_coreInfo;
 
-  return *this;
-}
+// return *this;
+// /}

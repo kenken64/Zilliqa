@@ -69,7 +69,7 @@ class Transaction : public SerializableDataBlock {
   Transaction();
 
   /// Copy constructor.
-  Transaction(const Transaction& src);
+  // Transaction(const Transaction& src);
 
   /// Constructor with specified transaction fields.
   Transaction(const uint32_t& version, const uint64_t& nonce,
@@ -93,7 +93,7 @@ class Transaction : public SerializableDataBlock {
               const Signature& signature);
 
   /// Constructor with core information.
-  Transaction(const TxnHash& tranID, const TransactionCoreInfo coreInfo,
+  Transaction(const TxnHash& tranID, const TransactionCoreInfo& coreInfo,
               const Signature& signature);
 
   /// Constructor for loading transaction information from a byte stream.
@@ -190,7 +190,7 @@ class Transaction : public SerializableDataBlock {
   bool operator>(const Transaction& tran) const;
 
   /// Assignment operator.
-  Transaction& operator=(const Transaction& src);
+  // Transaction& operator=(const Transaction& src);
 };
 
 #endif  // __TRANSACTION_H__

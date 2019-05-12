@@ -265,7 +265,7 @@ Address GenOneReceiver() {
 Transaction CreateValidTestingTransaction(PrivKey& fromPrivKey,
                                           PubKey& fromPubKey,
                                           const Address& toAddr,
-                                          uint128_t amount,
+                                          const uint128_t& amount,
                                           uint64_t prevNonce) {
   unsigned int version = 0;
   auto nonce = prevNonce + 1;

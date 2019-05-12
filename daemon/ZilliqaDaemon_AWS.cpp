@@ -65,7 +65,7 @@ enum SyncType : unsigned int {
   DB_VERIF
 };
 
-string ReadLastLine(string filePath, [[gnu::unused]] ofstream& log) {
+string ReadLastLine(const string& filePath, [[gnu::unused]] ofstream& log) {
   ifstream logFile;
 
   logFile.open(filePath + "/" + logName);
@@ -100,7 +100,7 @@ string ReadLastLine(string filePath, [[gnu::unused]] ofstream& log) {
   return lastLine;
 }
 
-vector<pid_t> getProcIdByName(string procName, ofstream& log) {
+vector<pid_t> getProcIdByName(const string& procName, ofstream& log) {
   vector<pid_t> result;
   result.clear();
 
@@ -198,7 +198,7 @@ vector<pid_t> getProcIdByName(string procName, ofstream& log) {
   closedir(dp);
   return result;
 }
-string execute(string cmd) {
+string execute(const string& cmd) {
   array<char, 128> buffer{};
   string result;
   shared_ptr<FILE> pipe(popen(cmd.c_str(), "r"), pclose);
@@ -214,7 +214,7 @@ void initialize(unordered_map<string, vector<pid_t>>& pids,
                 unordered_map<pid_t, bool>& died, ofstream& log) {
   bool isProcesstoTrack = false;
   while (!isProcesstoTrack) {
-    for (auto v : programName) {
+    for (const auto& v : programName) {
       vector<pid_t> tmp = getProcIdByName(v, log);
       if (tmp.size() > 0) {
         isProcesstoTrack = true;
@@ -240,8 +240,9 @@ void initialize(unordered_map<string, vector<pid_t>>& pids,
   }
 }
 
-void StartNewProcess(const string pubKey, const string privKey, const string ip,
-                     const string port, const string path, ofstream& log) {
+void StartNewProcess(const string& pubKey, const string& privKey,
+                     const string& ip, const string& port, const string& path,
+                     ofstream& log) {
   log << "Create new Zilliqa process..." << endl;
   signal(SIGCHLD, SIG_IGN);
   pid_t pid;
